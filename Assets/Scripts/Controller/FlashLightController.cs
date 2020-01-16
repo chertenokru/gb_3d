@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Runtime.InteropServices;
+using UnityEngine;
 
 namespace Geekbrains
 {
@@ -15,7 +16,7 @@ namespace Geekbrains
 
         public override void On()
         {
-            if(IsActive) return;
+            if (IsActive) return;
             if (_flashLightModel.BatteryChargeCurrent <= 0) return;
             base.On();
             _flashLightModel.Switch(FlashLightActiveType.On);
@@ -32,7 +33,7 @@ namespace Geekbrains
 
         public void Execute()
         {
-            if(!IsActive)
+            if (!IsActive)
             {
                 return;
             }
@@ -45,6 +46,8 @@ namespace Geekbrains
             if (_flashLightModel.EditBatteryCharge())
             {
                 _flashLightUi.Text = _flashLightModel.BatteryChargeCurrent;
+                _flashLightUi.Progress = _flashLightModel.BatteryChargeCurrent / _flashLightModel.BatteryChargeMax;
+              //  Debug.Log(_flashLightUi.Progress);
             }
             else
             {
